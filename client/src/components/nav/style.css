@@ -1,0 +1,13 @@
+.nav-wrapper {
+    background-color: #443147;
+}
+.title {
+    padding-left: 3%;
+}
+.search-bar {
+    background-color: #8a4794;
+    width: 30%;
+}
+#close-icon {
+    font-size: 20px;
+}
