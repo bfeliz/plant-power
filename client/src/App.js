@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import NoMatch from "./pages/NoMatch";
+import Login from "./pages/login";
+import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";
-import Container from "./components/container/container";
 import "./App.css";
 
 function App() {
@@ -10,18 +10,23 @@ function App() {
         <Router>
             <div>
                 <Navbar />
-                <Container />
-                <Switch>
-                    {/* <Route exact path={["/", "/books"]}>
-                        <Books />
-                    </Route>
-                    <Route exact path="/books/:id">
-                        <Detail />
-                    </Route>
-                    <Route>
-                        <NoMatch />
-                    </Route> */}
-                </Switch>
+                <div className="container">
+                    <div className="row">
+                        <div className="col s12">
+                            <Switch>
+                                {/* <Route exact path={["/", "/books"]}>
+                                    <Books />
+                                </Route> */}
+                                <Route exact path="/login">
+                                    <Login />
+                                </Route>
+                                <Route>
+                                    <NoMatch />
+                                </Route>
+                            </Switch>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Router>
     );
