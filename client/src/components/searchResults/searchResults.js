@@ -1,13 +1,12 @@
 import React from "react";
-import "./style.css";
+import "./styles.css";
 
-function searchResults () {
+function searchResults() {
     return (
-        <div
-        className="container">
+        <div>
             <div className="row1"></div>
         </div>
     );
 }
 
-export default searchResults
+export default searchResults;

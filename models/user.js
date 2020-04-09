@@ -15,6 +15,10 @@ const UserSchema = new Schema({
         unique: true,
         match: [/.+{6,*}/, "Password doesnt meat requirements"],
     },
+
+    searches: {
+        type: Array,
+    },
 });
 
 const user = mongoose.model("User", UserSchema);
