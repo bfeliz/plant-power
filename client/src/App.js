@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/login";
 import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";
-import searchResults from "./components/searchResults/searchResults";
-import selectedPlant from "./components/selectedPlant/selectedPlant";
+import Results from "./components/searchResults/searchResults";
+import Plant from "./components/selectedPlant/selectedPlant";
 import "./App.css";
 
 function App() {
@@ -16,9 +16,12 @@ function App() {
                     <div className="row">
                         <div className="col s12">
                             <Switch>
-                                {/* <Route exact path={["/", "/books"]}>
-                                    <Books />
-                                </Route> */}
+                                <Route exact path={["/", "/results"]}>
+                                    <Results />
+                                </Route>
+                                <Route exact path={["/", "/plant"]}>
+                                    <Plant />
+                                </Route>
                                 <Route exact path="/login">
                                     <Login />
                                 </Route>
