@@ -5,7 +5,7 @@ function searchResults () {
     return (
         <div
         className="container">
-            <div className="row plantName"></div>
+            <div className="row1"></div>
         </div>
     );
 }
