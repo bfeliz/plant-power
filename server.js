@@ -26,9 +26,9 @@ mongoose.connect(
 app.use(routes);
 
 // If no API routes are hit, send the React app
-//app.use(function (req, res) {
-//    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-//});
+app.use(function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 app.listen(PORT, function () {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
