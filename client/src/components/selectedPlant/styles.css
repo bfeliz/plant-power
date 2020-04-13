@@ -1,4 +1,85 @@
+.row {
+    /* margin-right: 25px;
+    margin-left: 25px; */
+    /* margin-top: 20px; */
+    /* margin-bottom: 25px; */
+}
+
 .plantName {
-    color: red;
-    background-color: greenyellow;
+    color: black;
+    border-style: solid;
+    border-top: black;
+    border-left: black;
+    border-right: black;
+}
+
+.imageHere {
+    width: 100%;
+}
+
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.imgSave {
+    margin-top: 25px;
+    width: 100%;
+    text-align: center;
+}
+
+.save {
+    /* float: right; */
+    background-color:  #8a4794;
+    /* display: inline-block;
+    margin: auto; */
+}
+
+
+.saveInfo {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+
+
+.rowTemp {
+    margin-top: 30px;
+}
+
+.sunicon{
+    font-size: 35px;
+    color: rgb(255, 252, 58);
+    float:right;
+}
+.watericon{
+    font-size: 35px;
+    padding-right: 5px;
+    color: rgb(0, 119, 255);
+    float:right;
+}
+.tempicon {
+    font-size: 35px;
+    float:right;
+}
+
+.infoCreate {
+    margin-top: 90px;
+}
+
+.infoCreate {
+    width: 100%;
+    text-align: center;
+}
+
+.create {
+    background-color:  #8a4794;
+    /* width: 226.98px; */
+    
 }
