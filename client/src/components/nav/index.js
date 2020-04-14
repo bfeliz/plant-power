@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import API from "./../../utils/api";
+import React from "react";
 import "./style.css";
 
 import { useAuth0 } from "../../react-auth0-spa";

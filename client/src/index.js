@@ -8,7 +8,6 @@ import config from "./auth_config.json";
 import App from "./App";
 import history from "./utils/history";
 
-
 const onRedirectCallback = (appState) => {
     history.push(
         appState && appState.targetUrl
@@ -18,14 +17,17 @@ const onRedirectCallback = (appState) => {
 };
 
 ReactDOM.render(
-    <Auth0Provider
-        domain={config.domain}
-        client_id={config.clientId}
-        redirect_uri={window.location.origin}
-        onRedirectCallback={onRedirectCallback}
-    >
-        <App />
-    </Auth0Provider>,
+    <Router>
+        <Auth0Provider
+            domain={config.domain}
+            client_id={config.clientId}
+            redirect_uri={window.location.origin}
+            onRedirectCallback={onRedirectCallback}
+        >
+            <App />
+        </Auth0Provider>
+        ,
+    </Router>,
 
     document.getElementById("root")
 );

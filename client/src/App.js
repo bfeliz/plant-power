@@ -23,7 +23,8 @@ function App() {
         setSearch(value);
     };
 
-    var history = useHistory();
+    const history = useHistory();
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
         API.getSearch(search)
@@ -34,6 +35,24 @@ function App() {
             .then(history.push("/results"))
             .catch((err) => console.log(err));
     };
+
+    const [plantResults, setPlantResults] = useState([]);
+
+    const cardClick = (id) => {
+        // event.preventDefault();
+        API.getPlant(id)
+            .then((res) => {
+                console.log(res.data);
+                const plant = {
+                    name: res.data.common_name,
+                    image: res.data.images[0].url,
+                };
+                setPlantResults(plant);
+            })
+            .then(history.push("/plant"))
+            .catch((err) => console.log(err));
+    };
+
     return (
         <div>
             <Navbar
@@ -46,12 +65,18 @@ function App() {
                     <div className="col s12">
                         <Switch>
                             <Route exact path={["/results"]}>
-                                <Results results={results} />
+                                <Results
+                                    results={results}
+                                    cardClick={cardClick}
+                                />
                             </Route>
-                            <Route exact path={["/", "/plant"]}>
-                                <Plant />
+                            <Route exact path={["/plant"]}>
+                                <Plant
+                                    name={plantResults.name}
+                                    image={plantResults.image}
+                                />
                             </Route>
-                            <Route exact path="/login">
+                            <Route exact path={["/", "/login"]}>
                                 <Login />
                             </Route>
                             <Route>
