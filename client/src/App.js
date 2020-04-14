@@ -1,5 +1,7 @@
+
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
+import { useAuth0 } from "./react-auth0-spa";
 import Login from "./pages/login";
 import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";
@@ -9,6 +11,10 @@ import Plant from "./components/selectedPlant/selectedPlant";
 import "./App.css";
 
 function App() {
+
+    const auth = useAuth0();
+    console.log(auth);
+
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
 
