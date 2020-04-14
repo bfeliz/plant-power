@@ -1,17 +1,16 @@
 import React from "react";
 import "./styles.css";
-import image from "./../../assets/roses.png";
 
-function selectedPlant() {
+function SelectedPlant(props) {
     return (
         <div>
             <div className="row plantName">
-                <h4>Planticus Name</h4>
+                <h4>{props.name}</h4>
             </div>
 
             <div className="row">
                 <div className="col imageHere">
-                    <img src={image} alt="roses" />
+                    <img src={props.image} alt={props.name} />
                 </div>
             </div>
 
@@ -55,4 +54,4 @@ function selectedPlant() {
     );
 }
 
-export default selectedPlant;
+export default SelectedPlant;

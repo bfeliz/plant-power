@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.css";
-import image from "./../../assets/roses.png";
+import Card from "./../card/card";
 
-function searchResults(props) {
+function SearchResults(props) {
     const data = props.results;
     return (
         <div>
@@ -10,21 +10,15 @@ function searchResults(props) {
                 <h4>Your Results</h4>
             </div>
             {[...data].map((plant) => (
-                <div className="row">
-                    <div className="col s12">
-                        <div className="card">
-                            <div className="card-content">
-                                <span className="card-title">
-                                    {plant.common_name}
-                                </span>
-                                <p>Click for more info</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Card
+                    key={plant.id}
+                    id={plant.id}
+                    common_name={plant.common_name}
+                    cardClick={props.cardClick}
+                />
             ))}
         </div>
     );
 }
 
-export default searchResults;
+export default SearchResults;

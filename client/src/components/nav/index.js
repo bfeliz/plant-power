@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import API from "./../../utils/api";
+import React from "react";
 import "./style.css";
 
 function Navbar(props) {
