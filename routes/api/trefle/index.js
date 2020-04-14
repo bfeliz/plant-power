@@ -2,16 +2,17 @@ const router = require("express").Router();
 const axios = require("axios");
 
 // GET - /api/trefle/all
-router.get("/all", function (req, res) {
+router.get("/all/:searchterm", function (req, res) {
+    const { searchterm } = req.params;
     axios
         .get(
             "https://trefle.io/api/plants?token=" +
                 process.env.TREFLE_API_KEY +
-                "&complete_data=true&common_name=cluster rose"
+                "&complete_data=true&page_size=10&page=1&q=" +
+                searchterm
         )
         .then(function (data) {
             res.json(data.data);
-            //res.json(data.data[0].id);
         });
 });
 

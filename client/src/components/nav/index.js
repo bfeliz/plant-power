@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import API from "./../../utils/api";
 import "./style.css";
 
 import { useAuth0 } from "../../react-auth0-spa";
@@ -40,11 +41,13 @@ function Navbar(props) {
                         </NavItem>
                     )}
 
-                    <form>
+                    <form onSubmit={props.handleFormSubmit}>
+
                         <div className="input-field right search-bar">
                             <input
                                 id="search"
                                 type="search"
+                                placeholder="Type plant name here"
                                 onChange={props.handleInputChange}
                                 value={props.search}
                                 name="search"
