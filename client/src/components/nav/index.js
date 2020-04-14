@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import API from "./../../utils/api";
 import "./style.css";
 
 function Navbar(props) {
@@ -7,11 +8,12 @@ function Navbar(props) {
             <nav>
                 <div className="nav-wrapper">
                     <div className="title left flow-text">Plant Power</div>
-                    <form>
+                    <form onSubmit={props.handleFormSubmit}>
                         <div className="input-field right search-bar">
                             <input
                                 id="search"
                                 type="search"
+                                placeholder="Type plant name here"
                                 onChange={props.handleInputChange}
                                 value={props.search}
                                 name="search"
