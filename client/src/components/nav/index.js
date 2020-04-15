@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
-
 import { useAuth0 } from "../../react-auth0-spa";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 function Navbar(props) {
-    const { isAuthenticated, loginWithPopup, logout } = useAuth0();
+    const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
+    useEffect(() => {
+        let sidenav = document.querySelector("#mobile-demo");
+        M.Sidenav.init(sidenav, {});
+    });
     return (
         <div>
             <nav>
                 <div className="nav-wrapper">
-                    <div className="title left flow-text">Plant Power</div>
-                    <ul id="nav-mobile" className="left">
+                    <a
+                        href="/"
+                        className="brand-logo center hide-on-med-and-down"
+                    >
+                        <i class="fas fa-leaf"></i>
+                        How's It Growing?
+                    </a>
+                    <a
+                        href="#"
+                        data-target="mobile-demo"
+                        className="sidenav-trigger"
+                    >
+                        <i className="material-icons">menu</i>
+                    </a>
+                    <ul id="nav-mobile" className="left hide-on-med-and-down">
                         <li>
                             {!isAuthenticated && (
                                 <a
@@ -32,13 +49,22 @@ function Navbar(props) {
                                 </a>
                             )}
                         </li>
+                        <li>
+                            {user && (
+                                <a href="mobile.html">
+                                    {user.name}'s Collection
+                                </a>
+                            )}
+                        </li>
                     </ul>
                     <form onSubmit={props.handleFormSubmit}>
+                        <a href="/">
+                            <i class="fas fa-leaf" id="hidden"></i>
+                        </a>
                         <div className="input-field right search-bar">
                             <input
                                 id="search"
                                 type="search"
-                                placeholder="Type plant name here"
                                 onChange={props.handleInputChange}
                                 value={props.search}
                                 name="search"
@@ -54,6 +80,32 @@ function Navbar(props) {
                     </form>
                 </div>
             </nav>
+            <ul className="sidenav" id="mobile-demo">
+                <li>
+                    {!isAuthenticated && (
+                        <a
+                            // className="btn"
+                            id="qsLoginBtn"
+                            onClick={() => loginWithPopup({})}
+                        >
+                            Login/Signup
+                        </a>
+                    )}
+
+                    {isAuthenticated && (
+                        <a
+                            // className="btn"
+                            id="qsLoginBtn"
+                            onClick={() => logout()}
+                        >
+                            Logout
+                        </a>
+                    )}
+                </li>
+                <li>
+                    {user && <a href="mobile.html">{user.name}'s Collection</a>}
+                </li>
+            </ul>
         </div>
     );
 }

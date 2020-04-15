@@ -8,6 +8,7 @@ body {
     background-image: url(./assets/background-img.png);
     background-repeat: no-repeat;
     background-position: top;
+    background-size: cover;
     font-family: "Assistant", sans-serif;
     font-size: 20px;
 }
