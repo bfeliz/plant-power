@@ -1,8 +1,11 @@
 import React from "react";
 import "./css/selectedPlant.css";
 import { useHistory } from "react-router-dom";
+import { useAuth0 } from "../react-auth0-spa";
 
 function SelectedPlant(props) {
+    const { isAuthenticated } = useAuth0();
+
     let history = useHistory();
 
     function handleClick() {
@@ -52,7 +55,30 @@ function SelectedPlant(props) {
                 </a>
             </div>
 
-            <div className="row infoCreate">
+            {isAuthenticated && (
+                <div className="row imgSave">
+                    <div className="col s12 houseSave">
+                        <a className="waves-effect waves-light btn-small save">
+                            Save to collection
+                        </a>
+                    </div>
+                </div>
+            )}
+            {!isAuthenticated && (
+                <div className="row infoCreate">
+                    <div className="col s12 houseCreate">
+                        <p>
+                            Like what you see? Want to know more? Log in or sign
+                            up for access to additional features and data!
+                        </p>
+                        <a className="waves-effect waves-light btn-small create">
+                            create account
+                        </a>
+                    </div>
+                </div>
+            )}
+
+            {/* <div className="row infoCreate">
                 <div className="col s12 houseCreate">
                     <p>
                         Like what you see? Want to know more? Log in or sign up
@@ -62,7 +88,7 @@ function SelectedPlant(props) {
                         create account
                     </a>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

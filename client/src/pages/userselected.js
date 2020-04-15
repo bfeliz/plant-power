@@ -1,16 +1,23 @@
 import React from "react";
 import "./css/selectedPlant.css";
+import { useHistory } from "react-router-dom";
 
 function SelectedPlant(props) {
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/user");
+    }
+
     return (
         <div>
             <div className="row plantName">
                 <h4>{props.name}</h4>
             </div>
 
-            <div className="row">
-                <div className="col imageHere">
-                    <img src={props.image} alt={props.name} />
+            <div className="row" id="image-row">
+                <div className="col s12 imageHere">
+                    <img id="image" src={props.image} alt={props.name} />
                 </div>
             </div>
 
