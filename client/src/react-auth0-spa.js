@@ -20,12 +20,7 @@ export const Auth0Provider = ({
     useEffect(() => {
         const initAuth0 = async () => {
             console.log(initOptions);
-            let auth0FromHook;
-            try {
-                auth0FromHook = await createAuth0Client(initOptions);
-            } catch (e) {
-                console.error(e);
-            }
+            const auth0FromHook = await createAuth0Client(initOptions);
 
             console.log("TEST:", auth0FromHook);
             setAuth0(auth0FromHook);
