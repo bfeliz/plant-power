@@ -1,16 +1,23 @@
 import React from "react";
-import "./styles.css";
+import "./css/selectedPlant.css";
+import { useHistory } from "react-router-dom";
 
 function SelectedPlant(props) {
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/user");
+    }
+
     return (
         <div>
             <div className="row plantName">
                 <h4>{props.name}</h4>
             </div>
 
-            <div className="row">
-                <div className="col imageHere">
-                    <img src={props.image} alt={props.name} />
+            <div className="row" id="image-row">
+                <div className="col s12 imageHere">
+                    <img id="image" src={props.image} alt={props.name} />
                 </div>
             </div>
 
@@ -33,14 +40,27 @@ function SelectedPlant(props) {
                 <div className="col s3">
                     <i className="fas fa-tint watericon"></i>
                 </div>
-                <div className="col s9 water">water amount</div>
+                <div className="col s9 water">{props.water}</div>
             </div>
 
             <div className="row rowTemp">
                 <div className="col s3">
                     <i className="fas fa-temperature-high tempicon"></i>
                 </div>
-                <div className="col s9 temp">temperature</div>
+                <div className="col s9 temp">{props.tempMin}</div>
+            </div>
+
+            <div className="row rowTemp">
+                <div className="col s3">
+                    <i className="fas fa-leaf"></i>
+                </div>
+                <div className="col s9 temp">{props.type}</div>
+            </div>
+            <div className="row rowTemp">
+                <div className="col s3">
+                    <i className="fas fa-cloud"></i>
+                </div>
+                <div className="col s9 temp">{props.shade}</div>
             </div>
 
             <div className="row infoCreate">

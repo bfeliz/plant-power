@@ -2,9 +2,6 @@ import React from "react";
 import "./style.css";
 
 import { useAuth0 } from "../../react-auth0-spa";
-//import isAuthenticated from "../react-auth0-spa";
-
-import { NavItem, Button } from "reactstrap";
 
 function Navbar(props) {
     const { isAuthenticated, loginWithPopup, logout } = useAuth0();
@@ -13,35 +10,30 @@ function Navbar(props) {
             <nav>
                 <div className="nav-wrapper">
                     <div className="title left flow-text">Plant Power</div>
+                    <ul id="nav-mobile" className="left">
+                        <li>
+                            {!isAuthenticated && (
+                                <a
+                                    className="btn"
+                                    id="qsLoginBtn"
+                                    onClick={() => loginWithPopup({})}
+                                >
+                                    Login/Signup
+                                </a>
+                            )}
 
-                    {!isAuthenticated && (
-                        <NavItem>
-                            <Button
-                                id="qsLoginBtn"
-                                color="primary"
-                                className="btn-margin"
-                                onClick={() => loginWithPopup({})}
-                            >
-                                Log in
-                            </Button>
-                        </NavItem>
-                    )}
-
-                    {isAuthenticated && (
-                        <NavItem>
-                            <Button
-                                id="qsLoginBtn"
-                                color="primary"
-                                className="btn-margin"
-                                onClick={() => logout()}
-                            >
-                                Log out
-                            </Button>
-                        </NavItem>
-                    )}
-
+                            {isAuthenticated && (
+                                <a
+                                    className="btn"
+                                    id="qsLoginBtn"
+                                    onClick={() => logout()}
+                                >
+                                    Logout
+                                </a>
+                            )}
+                        </li>
+                    </ul>
                     <form onSubmit={props.handleFormSubmit}>
-
                         <div className="input-field right search-bar">
                             <input
                                 id="search"
