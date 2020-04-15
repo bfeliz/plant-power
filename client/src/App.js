@@ -8,10 +8,11 @@ import API from "./utils/api";
 import Results from "./pages/searchResults";
 import Plant from "./pages/selectedPlant";
 import "./App.css";
+import ExternalApi from "./components/views/ExternalApi";
+import PrivateRoute from "react-private-route";
 
 function App() {
-    const auth = useAuth0();
-    console.log(auth);
+    const { loading } = useAuth0();
 
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
@@ -56,6 +57,8 @@ function App() {
             .catch((err) => console.log(err));
     };
 
+    if (loading) return <h1>Loading...</h1>;
+
     return (
         <div>
             <Navbar
@@ -70,6 +73,13 @@ function App() {
                             <Route exact path={["/"]}>
                                 <Welcome />
                             </Route>
+                            <PrivateRoute path="/user" />
+
+                            {/* NEW - add a route to the ExternalApi component */}
+                            <PrivateRoute
+                                path="/external-api"
+                                component={ExternalApi}
+                            />
                             <Route exact path={["/results"]}>
                                 <Results
                                     results={results}

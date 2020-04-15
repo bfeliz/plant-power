@@ -21,6 +21,7 @@ export const Auth0Provider = ({
         const initAuth0 = async () => {
             console.log(initOptions);
             const auth0FromHook = await createAuth0Client(initOptions);
+
             console.log("TEST:", auth0FromHook);
             setAuth0(auth0FromHook);
 
