@@ -1,26 +1,18 @@
+// Copy and paste your work, or start typing.
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    email: {
+    auth0_id: {
         type: String,
-        required: "Username is required",
         unique: true,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     },
-
-    password: {
-        type: String,
-        required: "Password is required",
-        unique: true,
-        match: [/.+{6,*}/, "Password doesnt meat requirements"],
-    },
-
     searches: {
         type: Array,
     },
 });
 
-const user = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
-module.exports = user;
+module.exports = User;
+yar;
