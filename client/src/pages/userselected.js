@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "./css/selectedPlant.css";
 
 function SelectedPlant(props) {
     return (
@@ -33,14 +33,27 @@ function SelectedPlant(props) {
                 <div className="col s3">
                     <i className="fas fa-tint watericon"></i>
                 </div>
-                <div className="col s9 water">water amount</div>
+                <div className="col s9 water">{props.water}</div>
             </div>
 
             <div className="row rowTemp">
                 <div className="col s3">
                     <i className="fas fa-temperature-high tempicon"></i>
                 </div>
-                <div className="col s9 temp">temperature</div>
+                <div className="col s9 temp">{props.tempMin}</div>
+            </div>
+
+            <div className="row rowTemp">
+                <div className="col s3">
+                    <i className="fas fa-leaf"></i>
+                </div>
+                <div className="col s9 temp">{props.type}</div>
+            </div>
+            <div className="row rowTemp">
+                <div className="col s3">
+                    <i className="fas fa-cloud"></i>
+                </div>
+                <div className="col s9 temp">{props.shade}</div>
             </div>
 
             <div className="row infoCreate">
