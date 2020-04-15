@@ -1,6 +1,6 @@
 import React from "react";
-import "./styles.css";
-import Card from "./../card/card";
+import "./css/searchResults.css";
+import Card from "../components/card/card";
 
 function SearchResults(props) {
     const data = props.results;

@@ -1,17 +1,15 @@
-
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
-import Login from "./pages/login";
+import Welcome from "./pages/index";
 import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";
 import API from "./utils/api";
-import Results from "./components/searchResults/searchResults";
-import Plant from "./components/selectedPlant/selectedPlant";
+import Results from "./pages/searchResults";
+import Plant from "./pages/selectedPlant";
 import "./App.css";
 
 function App() {
-
     const auth = useAuth0();
     console.log(auth);
 
@@ -46,6 +44,11 @@ function App() {
                 const plant = {
                     name: res.data.common_name,
                     image: res.data.images[0].url,
+                    type: res.data.duration,
+                    shade: res.data.main_species.growth.shade_tolerance,
+                    tempMin:
+                        res.data.main_species.growth.temperature_minimum.deg_f,
+                    water: res.data.main_species.growth.drought_tolerance,
                 };
                 setPlantResults(plant);
             })
@@ -64,6 +67,9 @@ function App() {
                 <div className="row">
                     <div className="col s12">
                         <Switch>
+                            <Route exact path={["/"]}>
+                                <Welcome />
+                            </Route>
                             <Route exact path={["/results"]}>
                                 <Results
                                     results={results}
@@ -74,10 +80,11 @@ function App() {
                                 <Plant
                                     name={plantResults.name}
                                     image={plantResults.image}
+                                    type={plantResults.type}
+                                    shade={plantResults.shade}
+                                    tempMin={plantResults.tempMin}
+                                    water={plantResults.water}
                                 />
-                            </Route>
-                            <Route exact path={["/", "/login"]}>
-                                <Login />
                             </Route>
                             <Route>
                                 <NoMatch />

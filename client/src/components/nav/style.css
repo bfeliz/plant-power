@@ -11,3 +11,10 @@
 #close-icon {
     font-size: 20px;
 }
+.btn {
+    background-color: #fbfaf8;
+    color: black;
+}
+.btn:hover {
+    background-color: #8a4794;
+}

@@ -19,7 +19,6 @@ router.get("/all/:searchterm", function (req, res) {
 // GET - /api/trefle/:id
 router.get("/:id", function (req, res) {
     const { id } = req.params;
-    console.log(id);
     axios
         .get(
             "https://trefle.io/api/plants/" +

@@ -1,5 +1,5 @@
 import React from "react";
-import "./nomatch.css";
+import "./css/nomatch.css";
 import image from "./../assets/roses.png";
 
 function NoMatch() {
