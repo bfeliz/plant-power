@@ -16,7 +16,6 @@ function Navbar(props) {
                                 <a
                                     className="btn"
                                     id="qsLoginBtn"
-                                    color="primary"
                                     onClick={() => loginWithPopup({})}
                                 >
                                     Login/Signup
@@ -27,7 +26,6 @@ function Navbar(props) {
                                 <a
                                     className="btn"
                                     id="qsLoginBtn"
-                                    color="primary"
                                     onClick={() => logout()}
                                 >
                                     Logout

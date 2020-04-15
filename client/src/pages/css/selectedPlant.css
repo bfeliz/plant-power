@@ -24,10 +24,10 @@
 } */
 
 .save {
-    /* float: right; */
     background-color: #8a4794;
-    /* display: inline-block;
-    margin: auto; */
+}
+.save:hover {
+    background-color: #443147;
 }
 
 .saveInfo {
