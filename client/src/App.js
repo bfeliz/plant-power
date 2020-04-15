@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
+import "materialize-css/dist/css/materialize.min.css";
 import Welcome from "./pages/index";
 import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";

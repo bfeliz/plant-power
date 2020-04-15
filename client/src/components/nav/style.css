@@ -1,8 +1,9 @@
 .nav-wrapper {
     background-color: #443147;
 }
-.title {
+.brand-logo {
     padding-left: 3%;
+    margin-right: 3%;
 }
 .search-bar {
     background-color: #8a4794;
@@ -17,4 +18,18 @@
 }
 .btn:hover {
     background-color: #8a4794;
+}
+#hidden {
+    display: none;
+}
+@media screen and (max-width: 992px) {
+    #hidden {
+        display: inline;
+    }
+    .brand-logo {
+        display: none;
+    }
+    .search-bar {
+        width: 65%;
+    }
 }

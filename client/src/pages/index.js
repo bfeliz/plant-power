@@ -4,7 +4,7 @@ import "./nomatch";
 function Welcome() {
     return (
         <div>
-            <h1>Welcome to Plant Power!</h1>
+            <h1>How's It Growing?</h1>
         </div>
     );
 }
