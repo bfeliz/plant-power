@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
 
 function SelectedPlant(props) {
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, loginWithPopup } = useAuth0();
 
     let history = useHistory();
 
@@ -17,35 +17,58 @@ function SelectedPlant(props) {
                 <h4>{props.name}</h4>
             </div>
 
-            <div className="row" id="image-row">
+            <div className="row">
                 <div className="col s12 imageHere">
                     <img id="image" src={props.image} alt={props.name} />
                 </div>
             </div>
 
-            <div className="row rowWater">
-                <div className="col s1">
-                    <i className="fas fa-tint watericon"></i>
-                </div>
-                <div className="col s11 water">
-                    Drought Tolerance: {props.water}
+            <div className="row">
+                <div className="col s12">
+                    <i className="fas fa-tint"></i>
+                    Water Use: {props.water}
                 </div>
             </div>
 
-            <div className="row rowTemp">
-                <div className="col s1">
-                    <i className="fas fa-temperature-high tempicon"></i>
-                </div>
-                <div className="col s11 temp">
+            <div className="row">
+                <div className="col s12">
+                    <i className="fas fa-temperature-high"></i>
                     Minimum Temperature: {props.tempMin} &deg;F
                 </div>
             </div>
 
-            <div className="row rowTemp">
-                <div className="col s1">
-                    <i className="fas fa-cloud"></i>
+            {isAuthenticated && (
+                <div>
+                    <div className="row">
+                        <div className="col s12">
+                            <i className="fas fa-leaf leaficon"></i>
+                            Type: {props.type}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <i className="fas fa-sun"></i>
+                            Drought Tolerance: {props.water}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <i className="fas fa-plus"></i>
+                            Soil Fertility: {props.fertility}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <i className="fas fa-seedling"></i>
+                            Family: {props.family}
+                        </div>
+                    </div>
                 </div>
-                <div className="col s11 shade">
+            )}
+
+            <div className="row">
+                <div className="col s12">
+                    <i className="fas fa-cloud"></i>
                     Shade Tolerance: {props.shade}
                 </div>
                 <br></br>
@@ -56,8 +79,8 @@ function SelectedPlant(props) {
             </div>
 
             {isAuthenticated && (
-                <div className="row imgSave">
-                    <div className="col s12 houseSave">
+                <div className="row">
+                    <div className="col s12">
                         <a className="waves-effect waves-light btn-small save">
                             Save to collection
                         </a>
@@ -66,29 +89,20 @@ function SelectedPlant(props) {
             )}
             {!isAuthenticated && (
                 <div className="row infoCreate">
-                    <div className="col s12 houseCreate">
+                    <div className="col s12">
                         <p>
                             Like what you see? Want to know more? Log in or sign
                             up for access to additional features and data!
                         </p>
-                        <a className="waves-effect waves-light btn-small create">
+                        <a
+                            className="waves-effect waves-light btn-small create"
+                            onClick={() => loginWithPopup({})}
+                        >
                             create account
                         </a>
                     </div>
                 </div>
             )}
-
-            {/* <div className="row infoCreate">
-                <div className="col s12 houseCreate">
-                    <p>
-                        Like what you see? Want to know more? Log in or sign up
-                        for access to additional features and data!
-                    </p>
-                    <a className="waves-effect waves-light btn-small create">
-                        create account
-                    </a>
-                </div>
-            </div> */}
         </div>
     );
 }

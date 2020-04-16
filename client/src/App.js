@@ -55,7 +55,11 @@ function App() {
                         tempMin:
                             res.data.main_species.growth.temperature_minimum
                                 .deg_f,
-                        water: res.data.main_species.growth.drought_tolerance,
+                        drought: res.data.main_species.growth.drought_tolerance,
+                        family: res.data.family_common_name,
+                        water: res.data.main_species.growth.moisture_use,
+                        fertility:
+                            res.data.main_species.growth.fertility_requirement,
                     };
                 } else {
                     plant = {
@@ -65,7 +69,11 @@ function App() {
                         tempMin:
                             res.data.main_species.growth.temperature_minimum
                                 .deg_f,
-                        water: res.data.main_species.growth.drought_tolerance,
+                        drought: res.data.main_species.growth.drought_tolerance,
+                        family: res.data.family_common_name,
+                        water: res.data.main_species.growth.moisture_use,
+                        fertility:
+                            res.data.main_species.growth.fertility_requirement,
                     };
                 }
                 setPlantResults(plant);
@@ -107,7 +115,10 @@ function App() {
                                         type={plantResults.type}
                                         shade={plantResults.shade}
                                         tempMin={plantResults.tempMin}
+                                        drought={plantResults.drought}
+                                        family={plantResults.family}
                                         water={plantResults.water}
+                                        fertility={plantResults.fertility}
                                     />
                                 </Route>
                                 <Route exact path={"/notfound"}>

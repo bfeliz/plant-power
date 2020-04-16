@@ -17,7 +17,7 @@ function Navbar(props) {
                         href="/"
                         className="brand-logo center hide-on-med-and-down"
                     >
-                        <i class="fas fa-leaf"></i>
+                        <i className="fas fa-leaf"></i>
                         How's It Growing?
                     </a>
                     <a
@@ -31,7 +31,7 @@ function Navbar(props) {
                         <li>
                             {!isAuthenticated && (
                                 <a
-                                    className="btn"
+                                    className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
                                     onClick={() => loginWithPopup({})}
                                 >
@@ -41,7 +41,7 @@ function Navbar(props) {
 
                             {isAuthenticated && (
                                 <a
-                                    className="btn"
+                                    className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
                                     onClick={() => logout()}
                                 >
