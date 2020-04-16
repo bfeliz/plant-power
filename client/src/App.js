@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { useAuth0 } from "./react-auth0-spa";
+import Scroll from "./components/scroll/scroll";
 import "materialize-css/dist/css/materialize.min.css";
 import Welcome from "./pages/index";
 import NoMatch from "./pages/nomatch";
@@ -8,13 +8,12 @@ import Navbar from "./components/nav/index";
 import API from "./utils/api";
 import Results from "./pages/searchResults";
 import Plant from "./pages/selectedPlant";
+import NotFound from "./pages/notfound";
 import "./App.css";
 import ExternalApi from "./components/views/ExternalApi";
 import PrivateRoute from "react-private-route";
 
 function App() {
-    const { loading } = useAuth0();
-
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -29,7 +28,11 @@ function App() {
         event.preventDefault();
         API.getSearch(search)
             .then((res) => {
-                setResults(res.data);
+                if (res.data.length === 0) {
+                    history.push("/notfound");
+                } else {
+                    setResults(res.data);
+                }
             })
             .then(setSearch(""))
             .then(history.push("/results"))
@@ -39,26 +42,37 @@ function App() {
     const [plantResults, setPlantResults] = useState([]);
 
     const cardClick = (id) => {
-        // event.preventDefault();
+        let plant = {};
         API.getPlant(id)
             .then((res) => {
                 console.log(res.data);
-                const plant = {
-                    name: res.data.common_name,
-                    image: res.data.images[0].url,
-                    type: res.data.duration,
-                    shade: res.data.main_species.growth.shade_tolerance,
-                    tempMin:
-                        res.data.main_species.growth.temperature_minimum.deg_f,
-                    water: res.data.main_species.growth.drought_tolerance,
-                };
+                if (res.data.images[0]) {
+                    plant = {
+                        name: res.data.common_name,
+                        image: res.data.images[0].url,
+                        type: res.data.duration,
+                        shade: res.data.main_species.growth.shade_tolerance,
+                        tempMin:
+                            res.data.main_species.growth.temperature_minimum
+                                .deg_f,
+                        water: res.data.main_species.growth.drought_tolerance,
+                    };
+                } else {
+                    plant = {
+                        name: res.data.common_name,
+                        type: res.data.duration,
+                        shade: res.data.main_species.growth.shade_tolerance,
+                        tempMin:
+                            res.data.main_species.growth.temperature_minimum
+                                .deg_f,
+                        water: res.data.main_species.growth.drought_tolerance,
+                    };
+                }
                 setPlantResults(plant);
             })
             .then(history.push("/plant"))
             .catch((err) => console.log(err));
     };
-
-    if (loading) return <h1>Loading...</h1>;
 
     return (
         <div>
@@ -70,37 +84,40 @@ function App() {
             <div className="container">
                 <div className="row">
                     <div className="col s12">
-                        <Switch>
-                            <Route exact path={["/"]}>
-                                <Welcome />
-                            </Route>
-                            <PrivateRoute path="/user" />
-
-                            {/* NEW - add a route to the ExternalApi component */}
-                            <PrivateRoute
-                                path="/external-api"
-                                component={ExternalApi}
-                            />
-                            <Route exact path={["/results"]}>
-                                <Results
-                                    results={results}
-                                    cardClick={cardClick}
+                        <Scroll>
+                            <Switch>
+                                <Route exact path={["/"]}>
+                                    <Welcome />
+                                </Route>
+                                <PrivateRoute path="/user" />
+                                <PrivateRoute
+                                    path="/external-api"
+                                    component={ExternalApi}
                                 />
-                            </Route>
-                            <Route exact path={["/plant"]}>
-                                <Plant
-                                    name={plantResults.name}
-                                    image={plantResults.image}
-                                    type={plantResults.type}
-                                    shade={plantResults.shade}
-                                    tempMin={plantResults.tempMin}
-                                    water={plantResults.water}
-                                />
-                            </Route>
-                            <Route>
-                                <NoMatch />
-                            </Route>
-                        </Switch>
+                                <Route exact path={["/results"]}>
+                                    <Results
+                                        results={results}
+                                        cardClick={cardClick}
+                                    />
+                                </Route>
+                                <Route exact path={["/plant"]}>
+                                    <Plant
+                                        name={plantResults.name}
+                                        image={plantResults.image}
+                                        type={plantResults.type}
+                                        shade={plantResults.shade}
+                                        tempMin={plantResults.tempMin}
+                                        water={plantResults.water}
+                                    />
+                                </Route>
+                                <Route exact path={"/notfound"}>
+                                    <NotFound />
+                                </Route>
+                                <Route>
+                                    <NoMatch />
+                                </Route>
+                            </Switch>
+                        </Scroll>
                     </div>
                 </div>
             </div>
