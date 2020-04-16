@@ -2,6 +2,7 @@ import React from "react";
 import "./css/selectedPlant.css";
 import { useHistory } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
+import API from "./../utils/api";
 
 function SelectedPlant(props) {
     const { isAuthenticated, loginWithPopup } = useAuth0();
@@ -11,6 +12,10 @@ function SelectedPlant(props) {
     function handleClick() {
         history.push("/results");
     }
+    function handleSave() {
+        API.addCollection(props.userid, props.name, props.id);
+    }
+
     return (
         <div>
             <div className="row plantName">
@@ -81,7 +86,10 @@ function SelectedPlant(props) {
             {isAuthenticated && (
                 <div className="row">
                     <div className="col s12">
-                        <a className="waves-effect waves-light btn-small save">
+                        <a
+                            className="waves-effect waves-light btn-small save"
+                            onClick={handleSave}
+                        >
                             Save to collection
                         </a>
                     </div>

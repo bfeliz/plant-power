@@ -59,7 +59,7 @@ function Navbar(props) {
                     </ul>
                     <form onSubmit={props.handleFormSubmit}>
                         <a href="/">
-                            <i class="fas fa-leaf" id="hidden"></i>
+                            <i className="fas fa-leaf" id="hidden"></i>
                         </a>
                         <div className="input-field right search-bar">
                             <input

@@ -2,26 +2,31 @@ const router = require("express").Router();
 const UserCollection = require("../../../models/user");
 const authRoute = require("../../../utils/auth0");
 
-// GET - /api/user
-router.get("/api/user", authRoute, async function (req, res) {
+router.get("/:user", async function (req, res) {
+    const { user } = req.params;
     const userData = {
-        auth0_id: req.user.sub,
+        id: user,
     };
-    let user = await UserCollection.findOne(userData);
-    if (!user) {
+    let checkUser = await UserCollection.findOne(userData);
+    if (!checkUser) {
         res.send(UserCollection.create(userData));
     } else {
         res.send(user);
     }
 });
 
-router.put("/api/user", authRoute, (req, res) => {
-    let user = UserCollection.findOne({ auth0_id: req.user.sub });
-    // add one search to saved searches
-    user.search.push(res.user.search);
-    // update all searches at will
-    //user.searches = res.user.searches;
-    user.save();
+router.put("/:user", async function (req, res) {
+    UserCollection.findOneAndUpdate(
+        { id: req.params.user },
+        { $push: { searches: req.body } },
+        { new: true }
+    )
+        .then((dbSearches) => {
+            res.json(dbSearches);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
 });
 
 module.exports = router;
