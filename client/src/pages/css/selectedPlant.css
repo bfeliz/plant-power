@@ -16,17 +16,13 @@
     max-width: 100%;
     height: auto;
 }
-/* 
-.imgSave {
-    margin-top: 25px;
-    width: 100%;
-    text-align: center;
-} */
 
-.save {
+.save,
+.create {
     background-color: #8a4794;
 }
-.save:hover {
+.save:hover,
+.create:hover {
     background-color: #443147;
 }
 
@@ -35,27 +31,32 @@
     margin-bottom: 30px;
     margin-left: 50px;
 }
-
-/* .rowWater {
-    margin-top: 110px;
-} */
-
+.fa-cloud,
+.fa-tint,
+.fa-temperature-high,
+.leaficon,
+.fa-seedling,
+.fa-sun,
+.fa-plus {
+    font-size: 2rem;
+    padding-right: 2%;
+}
+.fa-sun {
+    color: rgb(223, 226, 40);
+}
 .fa-cloud {
-    font-size: 35px;
     color: rgb(59, 59, 65);
-    /* float: right; */
 }
-.watericon {
-    font-size: 35px;
-    padding-right: 5px;
+.fa-tint {
     color: rgb(0, 119, 255);
-    /* float: right; */
 }
-.tempicon {
-    font-size: 35px;
-    /* float: right; */
+.leaficon,
+.fa-seedling {
+    color: #6d8659;
 }
-
+.fa-plus {
+    color: #8a4794;
+}
 .return-link {
     color: #6d8659;
     cursor: pointer;
@@ -66,9 +67,4 @@
 .infoCreate {
     width: 100%;
     text-align: center;
-}
-
-.create {
-    background-color: #8a4794;
-    /* width: 226.98px; */
 }
