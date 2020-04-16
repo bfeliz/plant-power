@@ -9,11 +9,14 @@ import API from "./utils/api";
 import Results from "./pages/searchResults";
 import Plant from "./pages/selectedPlant";
 import NotFound from "./pages/notfound";
+import { useAuth0 } from "./react-auth0-spa";
 import "./App.css";
 import ExternalApi from "./components/views/ExternalApi";
 import PrivateRoute from "react-private-route";
 
 function App() {
+    const { user } = useAuth0();
+
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -49,6 +52,7 @@ function App() {
                 if (res.data.images[0]) {
                     plant = {
                         name: res.data.common_name,
+                        id: res.data.id,
                         image: res.data.images[0].url,
                         type: res.data.duration,
                         shade: res.data.main_species.growth.shade_tolerance,
@@ -60,10 +64,12 @@ function App() {
                         water: res.data.main_species.growth.moisture_use,
                         fertility:
                             res.data.main_species.growth.fertility_requirement,
+                        userid: user.sub,
                     };
                 } else {
                     plant = {
                         name: res.data.common_name,
+                        id: res.data.id,
                         type: res.data.duration,
                         shade: res.data.main_species.growth.shade_tolerance,
                         tempMin:
@@ -74,6 +80,7 @@ function App() {
                         water: res.data.main_species.growth.moisture_use,
                         fertility:
                             res.data.main_species.growth.fertility_requirement,
+                        userid: user.sub,
                     };
                 }
                 setPlantResults(plant);
@@ -119,6 +126,8 @@ function App() {
                                         family={plantResults.family}
                                         water={plantResults.water}
                                         fertility={plantResults.fertility}
+                                        userid={plantResults.userid}
+                                        id={plantResults.id}
                                     />
                                 </Route>
                                 <Route exact path={"/notfound"}>
