@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import "./index.css";
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
