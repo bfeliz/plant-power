@@ -1,3 +1,4 @@
+// displays data for particular selected plant
 import React from "react";
 import "./css/selectedPlant.css";
 import { useHistory } from "react-router-dom";
@@ -5,18 +6,22 @@ import { useAuth0 } from "../react-auth0-spa";
 import API from "./../utils/api";
 
 function SelectedPlant(props) {
-    console.log(props);
+    // checks if user logged in
     const { isAuthenticated, loginWithPopup } = useAuth0();
 
+    // allows for redirects
     let history = useHistory();
 
+    // redirects to results page on click of return link
     function handleClick() {
         history.push("/results");
     }
+    // makes api call on click of save button
     function handleSave() {
         API.addCollection(props.userid, props.name, props.id);
     }
 
+    // function to capitalize first letter of every word in plant name
     let newName = "";
     if (props.length !== 0) {
         newName = String(props.name)
@@ -31,6 +36,7 @@ function SelectedPlant(props) {
     return (
         <div>
             <div className="row plantName">
+                {/* shows capitalized plant name or defaults to original if function hits error */}
                 {newName !== "Undefined" && <h4>{newName}</h4>}
                 {newName === "Undefined" && <h4>{props.name}</h4>}
             </div>
@@ -55,6 +61,7 @@ function SelectedPlant(props) {
                 </div>
             </div>
 
+            {/* displays extra information on each plant if user is logged in */}
             {isAuthenticated && (
                 <div>
                     <div className="row">
@@ -96,6 +103,7 @@ function SelectedPlant(props) {
                 </a>
             </div>
 
+            {/* sets create account or save buttons depending on user login status */}
             {isAuthenticated && (
                 <div className="row">
                     <div className="col s12">
@@ -117,7 +125,9 @@ function SelectedPlant(props) {
                         </p>
                         <a
                             className="waves-effect waves-light btn-small create"
-                            onClick={() => loginWithPopup({})}
+                            onClick={() =>
+                                loginWithPopup({}).then(history.push("/"))
+                            }
                         >
                             create account
                         </a>

@@ -1,3 +1,4 @@
+// scroll to top on every redirect
 import { useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import Scroll from "./components/scroll/scroll";
+import PrivateRoute from "react-private-route";
+// css framework
 import "materialize-css/dist/css/materialize.min.css";
+// page and component links
+import Scroll from "./components/scroll/scroll";
 import Welcome from "./pages/index";
 import NoMatch from "./pages/nomatch";
 import Navbar from "./components/nav/index";
@@ -13,21 +16,27 @@ import AddMore from "./pages/addmore";
 import User from "./pages/user";
 import { useAuth0 } from "./react-auth0-spa";
 import ExternalApi from "./components/views/ExternalApi";
-import PrivateRoute from "react-private-route";
+// custom css
 import "./App.css";
 
 function App() {
+    // allow for redirects
+    const history = useHistory();
+
+    // various state storage
     const { user } = useAuth0();
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
     const [userData, setUserData] = useState([]);
+    const [plantResults, setPlantResults] = useState([]);
 
+    // api call and page redirect for user collection
     const userPage = (e) => {
         e.preventDefault();
         if (user) {
             API.viewCollection(user.sub)
                 .then((res) => {
-                    if (res.data.length === 0) {
+                    if (res.data.searches.length === 0) {
                         history.push("/addmore");
                     } else {
                         setUserData(res.data.searches);
@@ -37,13 +46,13 @@ function App() {
         }
     };
 
+    // get value from searchbar
     const handleInputChange = (event) => {
         const { value } = event.target;
         setSearch(value);
     };
 
-    const history = useHistory();
-
+    // api call on submission of search
     const handleFormSubmit = (event) => {
         event.preventDefault();
         API.getSearch(search)
@@ -59,17 +68,13 @@ function App() {
             .catch((err) => console.log(err));
     };
 
-    const [plantResults, setPlantResults] = useState([]);
-
+    // api call on specific plant data
     const cardClick = (id) => {
         let plant = {};
         let plantImage = {};
         let userId = {};
-        let toxic = {};
         API.getPlant(id)
             .then((res) => {
-                console.log(res.data);
-
                 plant = {
                     name: res.data.common_name,
                     id: res.data.id,
@@ -89,16 +94,10 @@ function App() {
                 if (user) {
                     userId = { userid: user.sub };
                 }
-                if (res.data.main_species.specifications.toxicity) {
-                    toxic = {
-                        toxicity: res.data.main_species.specifications.toxicity,
-                    };
-                }
                 let finalPlant = {
                     ...plant,
                     ...plantImage,
                     ...userId,
-                    ...toxic,
                 };
                 setPlantResults(finalPlant);
             })
@@ -106,6 +105,7 @@ function App() {
             .catch((err) => console.log(err));
     };
 
+    // set application format and routes
     return (
         <div>
             <Navbar

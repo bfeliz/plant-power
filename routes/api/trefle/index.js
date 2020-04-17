@@ -1,7 +1,8 @@
+// Trefle API routes
 const router = require("express").Router();
 const axios = require("axios");
 
-// GET - /api/trefle/all
+// GET - /api/trefle/all, calls all plants matching term in searchbar
 router.get("/all/:searchterm", function (req, res) {
     const { searchterm } = req.params;
     axios
@@ -16,7 +17,7 @@ router.get("/all/:searchterm", function (req, res) {
         });
 });
 
-// GET - /api/trefle/:id
+// GET - /api/trefle/:id, gets data on specifically selected plants
 router.get("/:id", function (req, res) {
     const { id } = req.params;
     axios

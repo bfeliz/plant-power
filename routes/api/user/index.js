@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const UserCollection = require("../../../models/user");
-const authRoute = require("../../../utils/auth0");
 
+// check if user is already in database, adds them if they are not
 router.get("/:user", async function (req, res) {
     const { user } = req.params;
     const userData = {
@@ -15,6 +15,7 @@ router.get("/:user", async function (req, res) {
     }
 });
 
+// on click of save button, finds specific user and adds to their saved collection
 router.put("/:user", async function (req, res) {
     UserCollection.findOneAndUpdate(
         { id: req.params.user },
@@ -29,6 +30,7 @@ router.put("/:user", async function (req, res) {
         });
 });
 
+// finds specific user collection
 router.get("/collection/:user", async function (req, res) {
     UserCollection.findOne({ id: req.params.user })
         .then((dbResults) => {

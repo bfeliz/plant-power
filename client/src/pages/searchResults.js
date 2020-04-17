@@ -1,3 +1,4 @@
+// displays user search results by inserting card components
 import React from "react";
 import "./css/searchResults.css";
 import Card from "../components/card/card";

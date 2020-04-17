@@ -1,3 +1,4 @@
+// individual card component to render general search results and user collection
 import React from "react";
 
 function Card(props) {

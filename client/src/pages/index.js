@@ -1,3 +1,4 @@
+// Main welcome page
 import React from "react";
 import "./css/index.css";
 

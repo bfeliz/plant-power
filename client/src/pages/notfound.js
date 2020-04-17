@@ -1,3 +1,4 @@
+// Displays if user search returns no results
 import React from "react";
 import "./css/searchResults.css";
 

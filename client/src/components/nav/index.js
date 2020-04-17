@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import "./style.css";
 import { useAuth0 } from "../../react-auth0-spa";
 import M from "materialize-css/dist/js/materialize.min.js";
+import "./style.css";
 
 function Navbar(props) {
+    // allow for redirects
     const history = useHistory();
+    // verify user login status
     const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
 
+    // initiate sidebar if user on small screen
     useEffect(() => {
         let sidenav = document.querySelector("#mobile-demo");
         M.Sidenav.init(sidenav, {});
@@ -33,6 +36,7 @@ function Navbar(props) {
                     </a>
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
                         <li>
+                            {/* set buttons depending on user login status */}
                             {!isAuthenticated && (
                                 <a
                                     className="btn waves-effect waves-light"
@@ -75,6 +79,7 @@ function Navbar(props) {
                             )}
                         </li>
                     </ul>
+                    {/* searchbar */}
                     <form onSubmit={props.handleFormSubmit}>
                         <a href="/">
                             <i className="fas fa-leaf" id="hidden"></i>
@@ -98,8 +103,11 @@ function Navbar(props) {
                     </form>
                 </div>
             </nav>
+
+            {/* sidenav on med and down */}
             <ul className="sidenav" id="mobile-demo">
                 <li>
+                    {/* set sidenav links based on user status */}
                     {!isAuthenticated && (
                         <a
                             id="qsLoginBtn"
