@@ -58,6 +58,16 @@ function Navbar(props) {
                                 </a>
                             )}
                         </li>
+                        <li>
+                            {user && (
+                                <a
+                                    href="https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants"
+                                    target="_blank"
+                                >
+                                    Plant Toxicity Information
+                                </a>
+                            )}
+                        </li>
                     </ul>
                     <form onSubmit={props.handleFormSubmit}>
                         <a href="/">
@@ -85,21 +95,13 @@ function Navbar(props) {
             <ul className="sidenav" id="mobile-demo">
                 <li>
                     {!isAuthenticated && (
-                        <a
-                            // className="btn"
-                            id="qsLoginBtn"
-                            onClick={() => loginWithPopup({})}
-                        >
+                        <a id="qsLoginBtn" onClick={() => loginWithPopup({})}>
                             Login/Signup
                         </a>
                     )}
 
                     {isAuthenticated && (
-                        <a
-                            // className="btn"
-                            id="qsLoginBtn"
-                            onClick={() => logout()}
-                        >
+                        <a id="qsLoginBtn" onClick={() => logout()}>
                             Logout
                         </a>
                     )}
@@ -107,6 +109,16 @@ function Navbar(props) {
                 <li>
                     {user && (
                         <a onClick={props.userPage}>{user.name}'s Collection</a>
+                    )}
+                </li>
+                <li>
+                    {user && (
+                        <a
+                            href="https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants"
+                            target="_blank"
+                        >
+                            Plant Toxicity Information
+                        </a>
                     )}
                 </li>
             </ul>
