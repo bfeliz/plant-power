@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./style.css";
 import { useAuth0 } from "../../react-auth0-spa";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 function Navbar(props) {
+    const history = useHistory();
     const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
 
     useEffect(() => {
@@ -35,7 +37,11 @@ function Navbar(props) {
                                 <a
                                     className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
-                                    onClick={() => loginWithPopup({})}
+                                    onClick={() =>
+                                        loginWithPopup({}).then(
+                                            history.push("/")
+                                        )
+                                    }
                                 >
                                     Login/Signup
                                 </a>

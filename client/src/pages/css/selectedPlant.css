@@ -37,8 +37,7 @@
 .leaficon,
 .fa-seedling,
 .fa-sun,
-.fa-plus,
-.fa-biohazard {
+.fa-plus {
     font-size: 2rem;
     padding-right: 2%;
 }
@@ -57,9 +56,6 @@
 }
 .fa-plus {
     color: #8a4794;
-}
-.fa-biohazard {
-    color: rgb(182, 26, 26);
 }
 .return-link {
     color: #6d8659;

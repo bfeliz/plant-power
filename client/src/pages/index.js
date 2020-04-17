@@ -5,7 +5,7 @@ function Welcome() {
     return (
         <div>
             <h1>How's It Growing?</h1>
-            <h3>Letting your plants live their best lives</h3>
+            <h3>Let your plants live their best lives!</h3>
             <p>
                 Are you tired of searching the internet to find out if your
                 plant likes shade or needs tons of watering, only to find

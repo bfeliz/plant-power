@@ -5,6 +5,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import API from "./../utils/api";
 
 function SelectedPlant(props) {
+    console.log(props);
     const { isAuthenticated, loginWithPopup } = useAuth0();
 
     let history = useHistory();
@@ -16,15 +17,27 @@ function SelectedPlant(props) {
         API.addCollection(props.userid, props.name, props.id);
     }
 
+    let newName = "";
+    if (props.length !== 0) {
+        newName = String(props.name)
+            .split(" ")
+            .map(
+                (eachWord) =>
+                    eachWord.charAt(0).toUpperCase() + eachWord.slice(1)
+            )
+            .join(" ");
+    }
+
     return (
         <div>
             <div className="row plantName">
-                <h4>{props.name}</h4>
+                {newName !== "Undefined" && <h4>{newName}</h4>}
+                {newName === "Undefined" && <h4>{props.name}</h4>}
             </div>
 
             <div className="row">
                 <div className="col s12 imageHere">
-                    <img id="image" src={props.image} alt={props.name} />
+                    <img id="image" src={props.image} alt={props.newName} />
                 </div>
             </div>
 
@@ -66,12 +79,6 @@ function SelectedPlant(props) {
                         <div className="col s12">
                             <i className="fas fa-seedling"></i>
                             Family: {props.family}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12">
-                            <i className="fas fa-biohazard"></i>
-                            Toxicity: {props.toxicity}
                         </div>
                     </div>
                 </div>
