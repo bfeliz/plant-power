@@ -9,6 +9,7 @@ function SearchResults(props) {
             <div className="row1">
                 <h4>Your Results</h4>
             </div>
+            <br></br>
             {[...data].map((plant) => (
                 <Card
                     key={plant.id}

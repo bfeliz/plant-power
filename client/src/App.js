@@ -9,16 +9,33 @@ import API from "./utils/api";
 import Results from "./pages/searchResults";
 import Plant from "./pages/selectedPlant";
 import NotFound from "./pages/notfound";
+import AddMore from "./pages/addmore";
+import User from "./pages/user";
 import { useAuth0 } from "./react-auth0-spa";
-import "./App.css";
 import ExternalApi from "./components/views/ExternalApi";
 import PrivateRoute from "react-private-route";
+import "./App.css";
 
 function App() {
     const { user } = useAuth0();
-
     const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
+    const [userData, setUserData] = useState([]);
+
+    const userPage = (e) => {
+        e.preventDefault();
+        if (user) {
+            API.viewCollection(user.sub)
+                .then((res) => {
+                    if (res.data.length === 0) {
+                        history.push("/addmore");
+                    } else {
+                        setUserData(res.data.searches);
+                    }
+                })
+                .then(history.push("/user"));
+        }
+    };
 
     const handleInputChange = (event) => {
         const { value } = event.target;
@@ -46,44 +63,32 @@ function App() {
 
     const cardClick = (id) => {
         let plant = {};
+        let plantImage = {};
+        let userId = {};
         API.getPlant(id)
             .then((res) => {
                 console.log(res.data);
+                plant = {
+                    name: res.data.common_name,
+                    id: res.data.id,
+                    type: res.data.duration,
+                    shade: res.data.main_species.growth.shade_tolerance,
+                    tempMin:
+                        res.data.main_species.growth.temperature_minimum.deg_f,
+                    drought: res.data.main_species.growth.drought_tolerance,
+                    family: res.data.family_common_name,
+                    water: res.data.main_species.growth.moisture_use,
+                    fertility:
+                        res.data.main_species.growth.fertility_requirement,
+                };
                 if (res.data.images[0]) {
-                    plant = {
-                        name: res.data.common_name,
-                        id: res.data.id,
-                        image: res.data.images[0].url,
-                        type: res.data.duration,
-                        shade: res.data.main_species.growth.shade_tolerance,
-                        tempMin:
-                            res.data.main_species.growth.temperature_minimum
-                                .deg_f,
-                        drought: res.data.main_species.growth.drought_tolerance,
-                        family: res.data.family_common_name,
-                        water: res.data.main_species.growth.moisture_use,
-                        fertility:
-                            res.data.main_species.growth.fertility_requirement,
-                        userid: user.sub,
-                    };
-                } else {
-                    plant = {
-                        name: res.data.common_name,
-                        id: res.data.id,
-                        type: res.data.duration,
-                        shade: res.data.main_species.growth.shade_tolerance,
-                        tempMin:
-                            res.data.main_species.growth.temperature_minimum
-                                .deg_f,
-                        drought: res.data.main_species.growth.drought_tolerance,
-                        family: res.data.family_common_name,
-                        water: res.data.main_species.growth.moisture_use,
-                        fertility:
-                            res.data.main_species.growth.fertility_requirement,
-                        userid: user.sub,
-                    };
+                    plantImage = { image: res.data.images[0].url };
                 }
-                setPlantResults(plant);
+                if (user) {
+                    userId = { userid: user.sub };
+                }
+                let finalPlant = { ...plant, ...plantImage, ...userId };
+                setPlantResults(finalPlant);
             })
             .then(history.push("/plant"))
             .catch((err) => console.log(err));
@@ -95,6 +100,7 @@ function App() {
                 handleInputChange={handleInputChange}
                 handleFormSubmit={handleFormSubmit}
                 search={search}
+                userPage={userPage}
             />
             <div className="container">
                 <div className="row">
@@ -104,7 +110,12 @@ function App() {
                                 <Route exact path={["/"]}>
                                     <Welcome />
                                 </Route>
-                                <PrivateRoute path="/user" />
+                                <Route exact path={"/user"}>
+                                    <User
+                                        userData={userData}
+                                        cardClick={cardClick}
+                                    />
+                                </Route>
                                 <PrivateRoute
                                     path="/external-api"
                                     component={ExternalApi}
@@ -132,6 +143,9 @@ function App() {
                                 </Route>
                                 <Route exact path={"/notfound"}>
                                     <NotFound />
+                                </Route>
+                                <Route exact path={"/addmore"}>
+                                    <AddMore />
                                 </Route>
                                 <Route>
                                     <NoMatch />
