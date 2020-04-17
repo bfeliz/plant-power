@@ -13,6 +13,11 @@ function Navbar(props) {
         M.Sidenav.init(sidenav, {});
     });
 
+    const onclick = () => {
+        loginWithPopup({});
+        history.push("/");
+    };
+
     return (
         <div>
             <nav>
@@ -37,11 +42,7 @@ function Navbar(props) {
                                 <a
                                     className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
-                                    onClick={() =>
-                                        loginWithPopup({}).then(
-                                            history.push("/")
-                                        )
-                                    }
+                                    onClick={onclick()}
                                 >
                                     Login/Signup
                                 </a>
