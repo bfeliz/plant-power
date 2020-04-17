@@ -37,11 +37,8 @@ function Navbar(props) {
                                 <a
                                     className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
-                                    onClick={() =>
-                                        loginWithPopup({}).then(
-                                            history.push("/")
-                                        )
-                                    }
+                                    onClick={() => loginWithPopup({})}
+                                    onClick={history.push("/")}
                                 >
                                     Login/Signup
                                 </a>
