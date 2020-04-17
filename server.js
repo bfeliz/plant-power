@@ -36,6 +36,7 @@ app.use(function (req, res) {
     res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
+// listen for server
 app.listen(PORT, function () {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
