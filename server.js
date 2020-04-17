@@ -17,12 +17,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/plantpower", {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-});
+mongoose.connect(
+    process.env.MONGODB_URI ||
+        "mongodb://user1:password1@ds259347.mlab.com:59347/heroku_6dzprnm3",
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    }
+);
 
 // Use apiRoutes
 app.use(routes);
