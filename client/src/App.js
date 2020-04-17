@@ -65,9 +65,11 @@ function App() {
         let plant = {};
         let plantImage = {};
         let userId = {};
+        let toxic = {};
         API.getPlant(id)
             .then((res) => {
                 console.log(res.data);
+
                 plant = {
                     name: res.data.common_name,
                     id: res.data.id,
@@ -87,7 +89,17 @@ function App() {
                 if (user) {
                     userId = { userid: user.sub };
                 }
-                let finalPlant = { ...plant, ...plantImage, ...userId };
+                if (res.data.main_species.specifications.toxicity) {
+                    toxic = {
+                        toxicity: res.data.main_species.specifications.toxicity,
+                    };
+                }
+                let finalPlant = {
+                    ...plant,
+                    ...plantImage,
+                    ...userId,
+                    ...toxic,
+                };
                 setPlantResults(finalPlant);
             })
             .then(history.push("/plant"))

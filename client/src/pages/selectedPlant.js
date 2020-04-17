@@ -68,6 +68,12 @@ function SelectedPlant(props) {
                             Family: {props.family}
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <i className="fas fa-biohazard"></i>
+                            Toxicity: {props.toxicity}
+                        </div>
+                    </div>
                 </div>
             )}
 
