@@ -2,19 +2,19 @@ import React from "react";
 import "./css/searchResults.css";
 import Card from "../components/card/card";
 
-function UserCollection() {
-    // will need to make an API call to our database to get the user's specific plant names and plant ids to show in the collection, map over that instead of props
-    // const data = props.results;
+function UserCollection(props) {
+    const data = props.userData;
     return (
         <div>
             <div className="row1">
                 <h4>Your Collection</h4>
             </div>
+            <br></br>
             {[...data].map((plant) => (
                 <Card
-                    key={plant.id}
+                    key={plant._id}
                     id={plant.id}
-                    common_name={plant.common_name}
+                    common_name={plant.name}
                     cardClick={props.cardClick}
                 />
             ))}

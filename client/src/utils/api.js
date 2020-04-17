@@ -17,4 +17,7 @@ export default {
             id: plantId,
         });
     },
+    viewCollection: function (user) {
+        return axios.get("api/user/collection/" + user);
+    },
 };

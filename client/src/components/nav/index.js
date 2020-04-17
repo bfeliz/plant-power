@@ -5,10 +5,12 @@ import M from "materialize-css/dist/js/materialize.min.js";
 
 function Navbar(props) {
     const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
+
     useEffect(() => {
         let sidenav = document.querySelector("#mobile-demo");
         M.Sidenav.init(sidenav, {});
     });
+
     return (
         <div>
             <nav>
@@ -51,7 +53,7 @@ function Navbar(props) {
                         </li>
                         <li>
                             {user && (
-                                <a href="mobile.html">
+                                <a onClick={props.userPage}>
                                     {user.name}'s Collection
                                 </a>
                             )}
@@ -103,7 +105,9 @@ function Navbar(props) {
                     )}
                 </li>
                 <li>
-                    {user && <a href="mobile.html">{user.name}'s Collection</a>}
+                    {user && (
+                        <a onClick={props.userPage}>{user.name}'s Collection</a>
+                    )}
                 </li>
             </ul>
         </div>

@@ -29,4 +29,14 @@ router.put("/:user", async function (req, res) {
         });
 });
 
+router.get("/collection/:user", async function (req, res) {
+    UserCollection.findOne({ id: req.params.user })
+        .then((dbResults) => {
+            res.json(dbResults);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
+
 module.exports = router;
