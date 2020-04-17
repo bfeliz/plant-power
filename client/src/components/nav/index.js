@@ -13,11 +13,6 @@ function Navbar(props) {
         M.Sidenav.init(sidenav, {});
     });
 
-    const onclick = () => {
-        loginWithPopup({});
-        history.push("/");
-    };
-
     return (
         <div>
             <nav>
@@ -42,7 +37,11 @@ function Navbar(props) {
                                 <a
                                     className="btn waves-effect waves-light"
                                     id="qsLoginBtn"
-                                    onClick={onclick()}
+                                    onClick={() =>
+                                        loginWithPopup({}).then(
+                                            history.push("/")
+                                        )
+                                    }
                                 >
                                     Login/Signup
                                 </a>
@@ -102,7 +101,12 @@ function Navbar(props) {
             <ul className="sidenav" id="mobile-demo">
                 <li>
                     {!isAuthenticated && (
-                        <a id="qsLoginBtn" onClick={() => loginWithPopup({})}>
+                        <a
+                            id="qsLoginBtn"
+                            onClick={() =>
+                                loginWithPopup({}).then(history.push("/"))
+                            }
+                        >
                             Login/Signup
                         </a>
                     )}
