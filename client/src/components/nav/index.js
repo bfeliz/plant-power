@@ -42,7 +42,6 @@ function Navbar(props) {
                                             history.push("/")
                                         )
                                     }
-                                    onClick={history.push("/")}
                                 >
                                     Login/Signup
                                 </a>
