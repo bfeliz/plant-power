@@ -1,6 +1,6 @@
 {
-    "short_name": "Plant Power",
-    "name": "Plant Power Application",
+    "short_name": "How's It Growing",
+    "name": "How's It Growing Application",
     "icons": [
         {
             "src": "favicon.ico",
@@ -9,5 +9,7 @@
         }
     ],
     "start_url": ".",
-    "display": "standalone"
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
 }
